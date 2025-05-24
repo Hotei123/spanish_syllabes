@@ -4,8 +4,8 @@ import os
 def strings_to_images(string_list,
                       font_path, # Added font_path argument
                       output_folder="output_images",
-                      image_size=(300, 100),
-                      font_size=20,
+                      image_size=(300, 400), # Default image size adjusted for 3:4
+                      font_size=60, # Default font size adjusted
                       background_color="white",
                       text_color="black"):
     """
@@ -47,8 +47,8 @@ def strings_to_images(string_list,
             # Calculate text position (centered)
             # For Pillow versions 9.2.0 and later, use getbbox
             text_bbox = draw.textbbox((0, 0), text_content, font=font)
-            text_width = text_bbox[2] - text_bbox[0]
-            text_height = text_bbox[3] - text_bbox[1]
+            text_width = text_bbox [2] - text_bbox [0]
+            text_height = text_bbox [3] - text_bbox [1]
         except ValueError as e:
             # This error occurs if a non-TrueType font is used with textbbox
             print(f"ValueError with textbbox: {e}. This usually means the loaded font is not a TrueType/OpenType font.")
@@ -62,7 +62,7 @@ def strings_to_images(string_list,
                     text_width, text_height_fallback = draw.textsize(text_content, font=font)
                 except AttributeError:
                     print("Cannot determine text dimensions with the current font. Skipping text centering for this image.")
-                    text_width = image_size[0] / 2 # Arbitrary, won't center
+                    text_width = image_size [0] / 2 # Arbitrary, won't center
                     text_height_fallback = font_size # Rough estimate
             # For height with default font, it's harder to get accurately without TrueType info.
             # We might just use font_size or a fixed proportion.
@@ -82,8 +82,9 @@ def strings_to_images(string_list,
                  # In a real application, you might want to stop execution or handle this more strictly.
 
 
-        x = (image_size[0] - text_width) / 2
-        y = 0.75 * (image_size[1] - text_height) / 2
+        x = (image_size [0] - text_width) / 2
+        # Move the text slightly closer to the top
+        y = ((image_size [1] - text_height) / 2) * 0.4 # Adjust 0.8 as needed
 
         draw.text((x, y), text_content, font=font, fill=text_color)
 
@@ -106,8 +107,8 @@ def get_syllables():
                 if not (syllabe.endswith('e') or syllabe.endswith('i')):
                     continue
                 else:
-                    syllabe = syllabe[0] + 'u' + syllabe[1]
-            if syllabe[0] in ['h', 'x', 'w', 'y',]:
+                    syllabe = syllabe [0] + 'u' + syllabe [1]
+            if syllabe [0] in ['h', 'x', 'w', 'y',]:
                 continue
             syllabes.append(syllabe)
 
@@ -143,16 +144,12 @@ if __name__ == '__main__':
     output_directory = "my_text_images_truetype"
 
     # Invert the aspect ratio: now 3:4 (width:height)
-    # This means width is 3/4 times the height, or height is 4/3 times the width.
     img_width = 300 # Example width
     img_height = int(img_width * 4 / 3) # Calculates height to maintain 3:4 aspect (300 * 4/3 = 400)
-    # Alternatively, you could start with height and calculate width:
-    # img_height = 400 # Example height
-    # img_width = int(img_height * 3 / 4) # Calculates width to maintain 3:4 aspect (400 * 3/4 = 300)
 
     # Duplicate the font size
-    fnt_size = 120 # Original was 30, now 60
-    
+    font_size = 200 # Original was 30, now 60
+
     bg_color = "lightgreen"
     txt_color = "darkgreen"
 
@@ -161,7 +158,7 @@ if __name__ == '__main__':
         font_path=font_file_path, # Pass the font path
         output_folder=output_directory,
         image_size=(img_width, img_height), # Updated image_size for 3:4 ratio
-        font_size=fnt_size, # Duplicated font size
+        font_size=font_size, # Duplicated font size
         background_color=bg_color,
         text_color=txt_color
     )
