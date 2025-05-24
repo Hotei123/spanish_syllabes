@@ -83,7 +83,7 @@ def strings_to_images(string_list,
 
 
         x = (image_size[0] - text_width) / 2
-        y = (image_size[1] - text_height) / 2
+        y = 0.75 * (image_size[1] - text_height) / 2
 
         draw.text((x, y), text_content, font=font, fill=text_color)
 
@@ -151,7 +151,7 @@ if __name__ == '__main__':
     # img_width = int(img_height * 3 / 4) # Calculates width to maintain 3:4 aspect (400 * 3/4 = 300)
 
     # Duplicate the font size
-    fnt_size = 30 * 2 # Original was 30, now 60
+    fnt_size = 120 # Original was 30, now 60
     
     bg_color = "lightgreen"
     txt_color = "darkgreen"
