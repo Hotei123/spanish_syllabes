@@ -90,7 +90,7 @@ def strings_to_images(string_list,
 
         try:
             img.save(os.path.join(output_folder, f"{text_content}.png"))
-            print(f"Saved image_{i+1}.png")
+            print(f"Saved {text_content}.png")
         except Exception as e:
             print(f"Error saving {text_content}.png: {e}")
 
