@@ -141,9 +141,18 @@ if __name__ == '__main__':
         # exit()
 
     output_directory = "my_text_images_truetype"
-    img_width = 400
-    img_height = 150
-    fnt_size = 30
+
+    # Invert the aspect ratio: now 3:4 (width:height)
+    # This means width is 3/4 times the height, or height is 4/3 times the width.
+    img_width = 300 # Example width
+    img_height = int(img_width * 4 / 3) # Calculates height to maintain 3:4 aspect (300 * 4/3 = 400)
+    # Alternatively, you could start with height and calculate width:
+    # img_height = 400 # Example height
+    # img_width = int(img_height * 3 / 4) # Calculates width to maintain 3:4 aspect (400 * 3/4 = 300)
+
+    # Duplicate the font size
+    fnt_size = 30 * 2 # Original was 30, now 60
+    
     bg_color = "lightgreen"
     txt_color = "darkgreen"
 
@@ -151,8 +160,8 @@ if __name__ == '__main__':
         my_strings,
         font_path=font_file_path, # Pass the font path
         output_folder=output_directory,
-        image_size=(img_width, img_height),
-        font_size=fnt_size,
+        image_size=(img_width, img_height), # Updated image_size for 3:4 ratio
+        font_size=fnt_size, # Duplicated font size
         background_color=bg_color,
         text_color=txt_color
     )
