@@ -1,0 +1,1 @@
+This code generates an [Anki](https://apps.ankiweb.net/). Run _generate_images.py_ to generate the images, and _generate_anki_deck.py_ to generate the deck _spanish_syllabes.apkg_. After importing this deck in Ankidroid, remember to copy the images in _my_text_images_truetype_ inside the folder _collection.media_ in the Android device.
