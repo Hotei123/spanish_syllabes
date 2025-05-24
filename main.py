@@ -84,15 +84,15 @@ def strings_to_images(string_list,
 
         x = (image_size [0] - text_width) / 2
         # Move the text slightly closer to the top
-        y = ((image_size [1] - text_height) / 2) * 0.4 # Adjust 0.8 as needed
+        y = ((image_size [1] - text_height) / 2) * 0.6 # Adjust 0.8 as needed
 
         draw.text((x, y), text_content, font=font, fill=text_color)
 
         try:
-            img.save(os.path.join(output_folder, f"image_{i+1}.png"))
+            img.save(os.path.join(output_folder, f"{text_content}.png"))
             print(f"Saved image_{i+1}.png")
         except Exception as e:
-            print(f"Error saving image_{i+1}.png: {e}")
+            print(f"Error saving {text_content}.png: {e}")
 
 
 def get_syllables():
@@ -148,7 +148,7 @@ if __name__ == '__main__':
     img_height = int(img_width * 4 / 3) # Calculates height to maintain 3:4 aspect (300 * 4/3 = 400)
 
     # Duplicate the font size
-    font_size = 200 # Original was 30, now 60
+    font_size = 150 # Original was 30, now 60
 
     bg_color = "lightgreen"
     txt_color = "darkgreen"
